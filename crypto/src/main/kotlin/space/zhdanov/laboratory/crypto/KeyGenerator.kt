@@ -14,6 +14,16 @@ abstract class RSAKeyGenerator : KeyGenerator {
     abstract fun getN(): BigInteger
     abstract fun getD(): BigInteger
 
+    fun parsePrivateKey(key: ByteArray): Pair<BigInteger, BigInteger> {
+        val values = key.toString(Charsets.US_ASCII).split("\n").map { it.toBigInteger() }
+        return Pair(values[0], values[1])
+    }
+
+    fun parsePublicKey(key: ByteArray): Pair<BigInteger, BigInteger> {
+        val values = key.toString(Charsets.US_ASCII).split("\n").map { it.toBigInteger() }
+        return Pair(values[0], values[1])
+    }
+
     final override fun getPrivateKey(): ByteArray {
         val s: String = getN().toString() + "\n" + getD().toString()
         return s.toByteArray(charset = Charsets.US_ASCII)

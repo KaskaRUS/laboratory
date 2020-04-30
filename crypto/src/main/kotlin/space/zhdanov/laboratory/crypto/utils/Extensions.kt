@@ -26,3 +26,12 @@ class BigIntegerIterator(start: BigInteger, private val endInclusive: BigInteger
         return initValue++
     }
 }
+
+fun ByteArray.toInt(): Int {
+    var result = 0
+    assert(this.size == Int.SIZE_BYTES) { "Expected length of the byte array is 4" }
+    for (i in this.indices) {
+        result = result or (this[Int.SIZE_BYTES - i - 1].toInt() shl 8 * i)
+    }
+    return result
+}

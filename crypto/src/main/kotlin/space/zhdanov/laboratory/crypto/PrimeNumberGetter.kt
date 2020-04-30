@@ -30,5 +30,7 @@ class SimplePrimeGetter : PrimeNumberGetter {
             if (primes.none { x % it == BigInteger.ZERO })
                 primes.add(x)
         }
+
+        lastCheck = primes.last()
     }
 }
